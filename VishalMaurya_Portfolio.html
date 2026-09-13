@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vishal Maurya — Full Stack / Systems Engineer</title>
+<meta name="description" content="Full Stack Developer with 4+ years building scalable, event-driven enterprise systems in Java, Spring Boot, Node.js, React and AWS." />
+<style>
+  :root{
+    --bg:#0d1210;
+    --bg-raised:#141b18;
+    --line:#26312c;
+    --ink:#e9efe9;
+    --ink-dim:#93a39a;
+    --ink-faint:#5f6f66;
+    --amber:#e0a458;
+    --amber-dim:#8a6a3f;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --sans: 'IBM Plex Sans', 'Segoe UI', Arial, sans-serif;
+    --maxw: 1120px;
+  }
+
+  @font-face{font-family:'IBM Plex Sans';src:local('Arial');}
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; }
+  ::selection{ background:var(--amber); color:#161616; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+
+  /* subtle grid texture */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(233,239,233,0.028) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(233,239,233,0.028) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(13,18,16,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 28px; max-width:var(--maxw); margin:0 auto; }
+  .brand{ font-family:var(--mono); font-size:14px; letter-spacing:0.02em; color:var(--ink); text-decoration:none; }
+  .brand b{ color:var(--amber); font-weight:600; }
+  .navlinks{ display:flex; gap:28px; font-size:14px; }
+  .navlinks a{ text-decoration:none; color:var(--ink-dim); transition:color .15s; }
+  .navlinks a:hover{ color:var(--ink); }
+  .status{ display:flex; align-items:center; gap:7px; font-size:13px; color:var(--ink-dim); font-family:var(--mono); }
+  .dot{ width:7px; height:7px; border-radius:50%; background:#5bd68a; box-shadow:0 0 0 3px rgba(91,214,138,0.15); }
+  .navtoggle{ display:none; }
+
+  section{ position:relative; z-index:1; }
+
+  /* HERO */
+  .hero{ padding:10px 0 10px; }
+  .hero-eyebrow{ font-family:var(--mono); font-size:18px; color:var(--ink-faint); margin-bottom:20px; }
+  .hero h1{
+    font-size: clamp(38px, 6vw, 66px);
+    line-height:1.05;
+    margin:0 0 28px;
+    max-width:16ch;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 span{ color:var(--ink-dim); }
+  .hero p.lede{
+    font-size:18px; color:var(--ink-dim); max-width:640px; margin:0 0 40px;
+  }
+  .hero p.lede strong{ color:var(--ink); font-weight:600; }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px; border-radius:6px; font-size:14.5px; font-weight:600;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition: transform .12s ease, border-color .15s, background .15s;
+  }
+  .btn-primary{ background:var(--amber); color:#151b16; }
+  .btn-primary:hover{ transform:translateY(-1px); background:#e9b06c; }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); background:transparent; }
+  .btn-ghost:hover{ border-color:var(--amber-dim); }
+
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border-top:1px solid var(--line);
+  }
+  .stat{ padding:26px 22px 0; border-right:1px solid var(--line); }
+  .stat:last-child{ border-right:none; }
+  .stat .num{ font-family:var(--mono); font-size:30px; color:var(--amber); font-weight:500; }
+  .stat .label{ font-size:13px; color:var(--ink-faint); margin-top:6px; max-width:20ch; }
+
+  /* SECTION HEADS */
+  .sec-head{ margin-bottom:5px; max-width:640px; }
+  .sec-tag{ font-family:var(--mono); font-size:18px; color:var(--amber); margin-bottom:14px; }
+  .sec-head h2{ font-size:clamp(26px,3.4vw,36px); margin:0 0 14px; font-weight:600; letter-spacing:-0.01em; }
+  .sec-head p{ color:var(--ink-dim); font-size:16px; margin:0; }
+
+  .section-pad{ padding:34px 0; border-top:1px solid var(--line); }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{ position:relative; }
+  .trow{
+    display:grid; grid-template-columns: 160px 1fr; gap:32px;
+    padding:32px 0; border-top:1px solid var(--line);
+  }
+  .trow:first-of-type{ border-top:none; }
+  .trange{ font-family:var(--mono); font-size:13px; color:var(--ink-faint); padding-top:4px; }
+  .trange .current{ color:#5bd68a; }
+  .trole h3{ margin:0 0 4px; font-size:20px; font-weight:600; }
+  .trole .org{ color:var(--ink-dim); font-size:14.5px; margin-bottom:16px; }
+  .trole ul{ margin:0; padding-left:20px; color:var(--ink-dim); font-size:15px; }
+  .trole li{ margin-bottom:9px; }
+  .trole li::marker{ color:var(--amber-dim); }
+  .trole li strong{ color:var(--ink); font-weight:600; }
+
+  /* PROJECTS */
+  .proj-list{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .proj{ background:var(--bg-raised); padding:36px; display:grid; grid-template-columns:1fr 1fr; gap:36px; }
+  .proj-meta{ display:flex; flex-direction:column; }
+  .proj-domain{ font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-bottom:10px; }
+  .proj h3{ font-size:22px; margin:0 0 12px; font-weight:600; }
+  .proj p.desc{ color:var(--ink-dim); font-size:15px; margin:0 0 20px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; }
+  .tag{ font-family:var(--mono); font-size:12px; padding:5px 10px; border:1px solid var(--line); border-radius:100px; color:var(--ink-dim); }
+  .proj-metrics{ display:grid; grid-template-columns:1fr 1fr; gap:18px; align-content:start; }
+  .metric{ border-left:2px solid var(--amber-dim); padding-left:14px; }
+  .metric .mnum{ font-family:var(--mono); font-size:24px; color:var(--amber); font-weight:600; }
+  .metric .mlabel{ font-size:13px; color:var(--ink-faint); margin-top:4px; }
+
+  /* STACK */
+  .stack-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .stack-col{ background:var(--bg-raised); padding:30px 28px; }
+  .stack-col h4{ font-family:var(--mono); font-size:13px; color:var(--amber); margin:0 0 20px; font-weight:500; }
+  .stack-col ul{ list-style:none; margin:0; padding:0; }
+  .stack-col li{ display:flex; justify-content:space-between; gap:10px; padding:9px 0; border-top:1px solid var(--line); font-size:14.5px; }
+  .stack-col li:first-of-type{ border-top:none; }
+  .stack-col li b{ font-weight:600; color:var(--ink); }
+  .stack-col li span{ color:var(--ink-faint); font-size:13px; text-align:right; }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap:60px; align-items:start; }
+  .about-copy p{ color:var(--ink-dim); font-size:17px; margin:0 0 20px; max-width:56ch; }
+  .about-copy strong{ color:var(--ink); font-weight:600; }
+  .about-facts{ border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .fact{ display:flex; justify-content:space-between; padding:16px 22px; border-top:1px solid var(--line); font-size:14.5px; }
+  .fact:first-child{ border-top:none; }
+  .fact .k{ color:var(--ink-faint); }
+  .fact .v{ color:var(--ink); font-weight:600; text-align:right; max-width:60%; }
+
+  .awards{ margin-top:28px; }
+  .award-row{ display:flex; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+  .award-row:first-child{ border-top:none; }
+  .award-row .a-mark{ font-family:var(--mono); color:var(--amber); font-size:13px; padding-top:2px; }
+  .award-row .a-text{ font-size:14.5px; color:var(--ink-dim); }
+  .award-row .a-text b{ color:var(--ink); }
+
+  /* CONTACT */
+  .contact-card{
+    border:1px solid var(--line); border-radius:14px; padding:56px;
+    background: radial-gradient(600px 260px at 15% -10%, rgba(224,164,88,0.09), transparent 70%), var(--bg-raised);
+    text-align:left;
+  }
+  .contact-card h2{ font-size:clamp(28px,4vw,42px); margin:0 0 16px; font-weight:600; max-width:16ch; }
+  .contact-card > p{ color:var(--ink-dim); font-size:16px; max-width:52ch; margin:0 0 36px; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap:14px; }
+  .clink{
+    display:flex; align-items:center; gap:10px;
+    border:1px solid var(--line); border-radius:8px; padding:13px 18px;
+    text-decoration:none; font-size:14.5px; color:var(--ink); font-family:var(--mono);
+    transition: border-color .15s, color .15s;
+  }
+  .clink:hover{ border-color:var(--amber-dim); color:var(--amber); }
+
+  footer{ padding:34px 0; text-align:center; color:var(--ink-faint); font-size:13px; font-family:var(--mono); border-top:1px solid var(--line); }
+
+  @media (max-width: 860px){
+    .navlinks{ display:none; }
+    .stats{ grid-template-columns:repeat(2,1fr); }
+    .stat{ border-right:1px solid var(--line); }
+    .stat:nth-child(2n){ border-right:none; }
+    .stat:nth-child(n+3){ border-top:1px solid var(--line); padding-top:22px; }
+    .trow{ grid-template-columns:1fr; gap:8px; }
+    .proj{ grid-template-columns:1fr; }
+    .stack-grid{ grid-template-columns:1fr; }
+    .about-grid{ grid-template-columns:1fr; gap:36px; }
+    .contact-card{ padding:32px; }
+    .hero{ padding:10px 0 10px; }
+    .section-pad{ padding:34px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#top"><b>Vishal Maurya</b></a>
+    <nav class="navlinks">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="status"><span class="dot"></span><b>Open to work</b></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-eyebrow"><b>Full Stack Developer — Java · Spring Boot · React.js · AWS</b></div>
+      <h1>I build backend systems <span>that scale before they break.</span></h1>
+      <p class="lede">
+        <strong>4+ years</strong> designing and shipping event-driven, microservices-based enterprise
+        applications — the kind that move insurance claims and commodity trades without falling over
+        under load. Comfortable owning a service from low-level design through production.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="mailto:vishalmauryavm00@gmail.com">Email me</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><div class="num">4+</div><div class="label">Years in production Java &amp; React systems</div></div>
+        <div class="stat"><div class="num">20+</div><div class="label">REST &amp; SOAP APIs integrated end-to-end</div></div>
+        <div class="stat"><div class="num">80%</div><div class="label">Cut in claims processing time, Max Life</div></div>
+        <div class="stat"><div class="num">70%</div><div class="label">Faster data sync, Salesforce ↔ Newgen</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section-pad" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Experience</div>
+        <h2>Two roles, one employer, growing scope.</h2>
+        <p>Newgen Software Technologies — from integrating APIs to architecting the services around them.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="trow">
+          <div class="trange">Jul 2024 — <span class="current">Present</span></div>
+          <div class="trole">
+            <h3>Sr. Software Engineer</h3>
+            <div class="org">Newgen Software Technologies Ltd. · Noida, India</div>
+            <ul>
+              <li>Architected scalable microservices in <strong>Spring Boot and Node.js</strong>, improving REST API maintainability by <strong>40%</strong>.</li>
+              <li>Optimized REST APIs, SQL queries, and backend services, cutting average response time by roughly <strong>35%</strong>.</li>
+              <li>Developed and enhanced claims-management UIs in <strong>React.js</strong>, keeping them responsive and easy to use.</li>
+              <li>Mentored junior developers and raised code quality through reviews and best practices.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="trow">
+          <div class="trange">Jul 2022 — Jun 2024</div>
+          <div class="trole">
+            <h3>Application Engineer</h3>
+            <div class="org">Newgen Software Technologies Ltd. · Noida, India</div>
+            <ul>
+              <li>Integrated <strong>20+ REST and SOAP APIs</strong>, cutting manual effort by <strong>60%</strong>.</li>
+              <li>Contributed to low-level design (LLD) and module design — service contracts, database schemas, and integration layers for scalable deployments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section-pad" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Selected work</div>
+        <h2>Systems shipped for real business risk.</h2>
+        <p>Two production engagements with measurable before/after numbers, spanning insurance claims and commodity-trading logistics.</p>
+      </div>
+
+      <div class="proj-list">
+        <div class="proj">
+          <div class="proj-meta">
+            <div class="proj-domain">Commodity Trading &amp; Energy Logistics · Sep 2024 – Present</div>
+            <h3>Trafigura — IT &amp; Process-Flow Development</h3>
+            <p class="desc">
+              Owned high-level design for system architecture, data flow, and integration strategy.
+              Connected Salesforce and Newgen through REST APIs and multithreaded pipelines, added Redis
+              caching for user lookups, and stood up a Kafka-based event-driven layer so services could
+              talk to each other asynchronously instead of blocking on every call.
+            </p>
+            <div class="tags">
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Kafka</span>
+              <span class="tag">Redis</span>
+              <span class="tag">React.js</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">GitLab CI/CD</span>
+            </div>
+          </div>
+          <div class="proj-metrics">
+            <div class="metric"><div class="mnum">70%</div><div class="mlabel">Faster Salesforce ↔ Newgen data sync</div></div>
+            <div class="metric"><div class="mnum">7+</div><div class="mlabel">Business processes supported across PROD/SIT/UAT/DEV</div></div>
+            <div class="metric"><div class="mnum">HLD</div><div class="mlabel">Owned architecture &amp; integration strategy</div></div>
+            <div class="metric"><div class="mnum">Kafka</div><div class="mlabel">Event-driven microservice communication</div></div>
+          </div>
+        </div>
+
+        <div class="proj">
+          <div class="proj-meta">
+            <div class="proj-domain">Insurance · Jul 2022 – Aug 2024</div>
+            <h3>Max Life Insurance — Claims Process-Flow</h3>
+            <p class="desc">
+              Designed low-level designs for claims-processing modules — API contracts, service layers,
+              and database schemas — then integrated 20+ REST and SOAP APIs with proper validation,
+              exception handling, and logging so failures surfaced clearly instead of silently.
+            </p>
+            <div class="tags">
+              <span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">REST / SOAP</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Jenkins</span>
+            </div>
+          </div>
+          <div class="proj-metrics">
+            <div class="metric"><div class="mnum">80%</div><div class="mlabel">Reduction in claim processing time</div></div>
+            <div class="metric"><div class="mnum">30%</div><div class="mlabel">Fewer system errors after enhancements</div></div>
+            <div class="metric"><div class="mnum">20+</div><div class="mlabel">REST &amp; SOAP APIs integrated</div></div>
+            <div class="metric"><div class="mnum">LLD</div><div class="mlabel">Claims modules, contracts &amp; schemas</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="section-pad" id="stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Stack</div>
+        <h2>What I reach for daily.</h2>
+        <p>Backend-first, with enough frontend and infra to ship a feature without waiting on anyone else.</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-col">
+          <h4>Languages &amp; frameworks</h4>
+          <ul>
+            <li><b>Java</b><span>Spring Boot, Microservices</span></li>
+            <li><b>JavaScript</b><span>React.js, Node.js</span></li>
+            <li><b>Design patterns</b><span>+ DSA</span></li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>Data &amp; messaging</h4>
+          <ul>
+            <li><b>MongoDB</b><span>document store</span></li>
+            <li><b>PostgreSQL / MySQL</b><span>relational</span></li>
+            <li><b>MS-SQL Server</b><span>enterprise</span></li>
+            <li><b>Kafka / Redis</b><span>events &amp; caching</span></li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>Cloud &amp; delivery</h4>
+          <ul>
+            <li><b>AWS</b><span>EC2, S3, RDS, Lambda</span></li>
+            <li><b>AWS</b><span>ACM, CloudFront, Route53</span></li>
+            <li><b>CI/CD</b><span>Jenkins, GitLab</span></li>
+            <li><b>Docker / Kubernetes</b><span>containers</span></li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>APIs &amp; integration</h4>
+          <ul>
+            <li><b>REST / SOAP</b><span>OAuth2.0, JWT</span></li>
+            <li><b>Microservices</b><span>event-driven arch.</span></li>
+            <li><b>Sessions</b><span>&amp; auth flows</span></li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>Frontend</h4>
+          <ul>
+            <li><b>React.js</b><span>UI development</span></li>
+            <li><b>HTML / CSS</b><span>Bootstrap</span></li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>Tooling</h4>
+          <ul>
+            <li><b>Git / GitHub / GitLab</b><span>version control</span></li>
+            <li><b>Linux / Ubuntu</b><span>daily driver</span></li>
+            <li><b>Postman</b><span>API testing</span></li>
+            <li><b>SVN / WinSCP</b><span>legacy ops</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section-pad" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">About</div>
+        <h2>The engineer behind the services.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            I started on the integration side — wiring REST and SOAP APIs together for an insurance
+            claims platform — before moving into <strong>architecting the services themselves</strong>.
+            That order matters: I've felt what a badly designed contract costs downstream, so I design
+            schemas and service boundaries to avoid it in the first place.
+          </p>
+          <p>
+            Most of my work sits in <strong>system design, event-driven architecture, and API
+            optimization</strong> — the parts of a product users never see but always feel when they're
+            slow. Lately that's meant Kafka-based pipelines, Redis caching, and pulling response times
+            down without touching a UI at all.
+          </p>
+          <p>
+            I still keep a foot in the frontend, building the React.js interfaces that sit on top of the
+            services I design, so I can reason about a feature end-to-end instead of handing it off
+            halfway through.
+          </p>
+
+          <div class="awards">
+            <div class="award-row"><div class="a-mark">★★</div><div class="a-text"><b>High Five Awards</b> — for delivering low-defect releases in UAT &amp; Pre-Prod (Max Life &amp; Tata AIA).</div></div>
+            <div class="award-row"><div class="a-mark">★★</div><div class="a-text"><b>Pinnacle Award</b> — for rapid, high-quality defect resolution in Max Life UAT.</div></div>
+            <div class="award-row"><div class="a-mark">✓</div><div class="a-text"><b>Certifications</b> — Spring Boot &amp; Microservices, AWS Fundamentals &amp; Cloud Computing (Scaler Topics, 2026).</div></div>
+          </div>
+        </div>
+
+        <div class="about-facts">
+          <div class="fact"><div class="k">Based in</div><div class="v">Noida, India</div></div>
+          <div class="fact"><div class="k">Role</div><div class="v">Sr. Software Engineer, Newgen</div></div>
+          <div class="fact"><div class="k">Experience</div><div class="v">4+ years, Full Stack</div></div>
+          <div class="fact"><div class="k">Education</div><div class="v">B.Tech, DSMNRU Lucknow · CGPA 8.65</div></div>
+          <div class="fact"><div class="k">Focus</div><div class="v">System design, microservices, event-driven architecture</div></div>
+          <div class="fact"><div class="k">Superpower</div><div class="v">Turning a slow API into a boring, fast one</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section-pad" id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <h2>Let's build something that holds up under load.</h2>
+        <p>Open to full-time backend and full-stack roles, and to conversations about system design, microservices, or event-driven architecture.</p>
+        <div class="contact-links">
+          <a class="clink" href="mailto:vishalmauryavm00@gmail.com">vishalmauryavm00@gmail.com</a>
+          <a class="clink" href="tel:+918114257540">+91 81142 57540</a>
+          <a class="clink" href="https://linkedin.com/in/vishalmau" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="clink" href="https://github.com/vishalmauryavm" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Vishal Maurya · built to load fast, not just look fast</div>
+</footer>
+
+</body>
+</html>
